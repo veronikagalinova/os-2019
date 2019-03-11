@@ -41,12 +41,8 @@
 Изведете всички файлове, които са по-нови от създадения файл в 9)
 	find  -type f -mtime +$(stat -c '%Y' f1) # find in '/'
 	find -type f -newer f1 
- 	stat 
-	%y     Time of last modification, human-readable
-
-        %Y     Time of last modification, seconds since Epoch
-
-
+ 	
+	
 -- 02-a-5506
 Изтрийте файловете по-нови от създаденият в 9) файл
 	find -newer f1 -type f -exec rm '{}' \;
