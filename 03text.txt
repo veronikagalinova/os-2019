@@ -1,0 +1,46 @@
+-- 03-a-0200
+Сортирайте /etc/passwd лексикографски по поле UserID.
+	cat /etc/passwd | sort -t':' -k3
+
+-- 03-a-0201
+Сортирайте /etc/passwd числово по поле UserID.
+(Открийте разликите с лексикографската сортировка)
+	cat /etc/passwd | sort -t':' -n -k3 | less
+
+-- 03-a-0210
+Изведете само 1-ва и 5-та колона на файла /etc/passwd спрямо разделител ":".
+	cut -d':' -f1,5 /etc/passwd
+
+-- 03-a-0211
+Изведете съдържанието на файла /etc/passwd от 2-ри до 6-ти символ.
+	cut -c 2-6 /etc/passwd
+
+-- 03-a-1500
+Намерете броя на символите в /etc/passwd. А колко реда има в /etc/passwd?
+	wc -m /etc/passwd
+	wc -l /etc/passwd
+
+
+-- 03-a-2000
+Извадете от файл /etc/passwd:
+- първите 12 реда 	cat /etc/passwd | head -12
+- първите 26 символа 	cat /etc/passwd | cut -c 1-26
+- всички редове, освен последните 4 cat /etc/passwd | head -n -4
+- последните 17 реда 	tac /etc/passwd | head -n 17
+- 151-я ред (или друг произволен, ако нямате достатъчно редове)
+	15 red -> cat /etc/passwd | head -n 15 | tail -n 1
+- последните 4 символа от 13-ти ред
+	cat /etc/passwd | head -n 13 | tail -n 1 | cut -c -4
+
+
+-- 03-b-3500
+Колко файлове в /bin са shell script? (Колко файлове в дадена директория са ASCII text?)
+	find /bin -type f -exec file '{}' \; | grep -e "shell script" | wc -l
+	find .  -type f -exec file '{}' \; | grep -e "ASCII text$"
+
+
+-- 03-b-3600
+Направете списък с директориите на вашата файлова система, до които нямате достъп. Понеже файловата система може да е много голяма, търсете до 3 нива на дълбочина. А до кои директории имате достъп? Колко на брой са директориите, до които нямате достъп?
+	find / -maxdepth 3 ! -executable
+	find / -maxdepth 3 -executable 2> /dev/null | wc -l
+ 
